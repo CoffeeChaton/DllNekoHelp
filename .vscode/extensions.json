@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "dprint.dprint",
+        "igorsbitnev.error-gutters",
+        "dbaeumer.vscode-eslint",
+        "sburg.vscode-javascript-booster",
+        "yzhang.markdown-all-in-one",
+        "yoavbls.pretty-ts-errors",
+        "alefragnani.project-manager",
+        "gruntfuggly.todo-tree",
+        "chakrounanas.turbo-console-log"
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "name": "vscode-dll-neko-help",
+    "displayName": "DllNekoHelp",
+    "version": "0.0.1",
+    "description": "DLL Snippets / DLL hover",
+    "categories": [
+        "Programming Languages",
+        "Snippets"
+    ],
+    "keywords": [
+        "dll"
+    ],
+    "homepage": "https://github.com/CoffeeChaton/DllNekoHelp",
+    "bugs": {
+        "url": "https://github.com/CoffeeChaton/DllNekoHelp/issues"
+    },
+    "repository": "https://github.com/CoffeeChaton/DllNekoHelp",
+    "license": "MIT",
+    "author": "Coffee Chaton(https://github.com/CoffeeChaton)",
+    "publisher": "cat1122",
+    "main": "./dist/extension",
+    "scripts": {
+        "auto_fix": "eslint --fix src",
+        "compile": "node esbuild.config.js",
+        "compile_dev": "node esbuild.config.js --isDev",
+        "fmt": "dprint fmt && pnpm run sort_pack",
+        "jest": "jest --onlyChanged",
+        "lint": "eslint src",
+        "package": "pnpm vsce package --no-dependencies --baseContentUrl https://github.com/CoffeeChaton/DllNekoHelp --baseImagesUrl https://raw.githubusercontent.com/CoffeeChaton/DllNekoHelp/main/",
+        "pnpm clean cache": "pnpm store prune",
+        "prepare": "husky install",
+        "sort_pack": "sort-package-json",
+        "test": "jest",
+        "up": "dprint config update && pnpm up -L",
+        "vscode:prepublish": "pnpm run lint && pnpm run fmt && pnpm run compile",
+        "watch": "tsc -watch -p ./"
+    },
+    "contributes": {},
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "devDependencies": {
+        "@jest/globals": "^29.7.0",
+        "@swc/core": "^1.5.7",
+        "@swc/jest": "^0.2.36",
+        "@types/jest": "^29.5.12",
+        "@types/node": "^20.12.12",
+        "@types/vscode": "^1.89.0",
+        "@typescript-eslint/eslint-plugin": "^7.9.0",
+        "@typescript-eslint/parser": "^7.9.0",
+        "@vscode/test-electron": "^2.3.10",
+        "@vscode/vsce": "^2.26.1",
+        "esbuild": "^0.21.3",
+        "eslint": "^8.57.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-airbnb-typescript": "^18.0.0",
+        "eslint-import-resolver-typescript": "^3.6.1",
+        "eslint-plugin-fp": "^2.3.0",
+        "eslint-plugin-immutable": "^1.0.0",
+        "eslint-plugin-import": "^2.29.1",
+        "eslint-plugin-jest": "^28.5.0",
+        "eslint-plugin-jest-formatting": "^3.1.0",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^6.1.1",
+        "eslint-plugin-regexp": "^2.5.0",
+        "eslint-plugin-sonarjs": "^0.25.1",
+        "eslint-plugin-unicorn": "^53.0.0",
+        "fs": "0.0.1-security",
+        "husky": "^9.0.11",
+        "jest": "^29.7.0",
+        "sort-package-json": "^2.10.0",
+        "typescript": "^5.4.5",
+        "vscode-tmgrammar-test": "^0.1.3"
+    },
+    "engines": {
+        "vscode": "^1.89.0"
+    },
+    "icon": "icon.png",
+    "galleryBanner": {
+        "color": "#b09df5",
+        "theme": "dark"
+    }
+}

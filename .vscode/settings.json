@@ -1,0 +1,51 @@
+{
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "dprint.dprint"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dprint.dprint"
+    },
+    "editor.codeActionsOnSave": {
+        "addMissingImports": "explicit",
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "eslint.enable": true,
+    "eslint.options": {
+        "extensions": [
+            ".ts"
+        ]
+    },
+    "eslint.probe": [
+        "typescript"
+    ],
+    "files.associations": {
+        ".eslintrc.json": "jsonc",
+        "ahk.configuration.json": "jsonc",
+        "dprint.json": "jsonc",
+        "extensions.json": "jsonc",
+        "settings.json": "jsonc",
+        "tsconfig.json": "jsonc"
+    },
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "workbench.localHistory.enabled": false,
+    "explorer.fileNesting.enabled": true,
+    "files.readonlyInclude": {
+        "node_modules/**": true,
+        "dist/**": true
+    },
+    "editor.unicodeHighlight.allowedLocales": {
+        "zh-hans": true,
+        "zh-hant": true
+    }
+    // "markdown.extension.list.indentationSize": "inherit"
+}

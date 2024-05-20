@@ -1,0 +1,14 @@
+{
+    "version": "0.2",
+    "ignorePaths": [
+        "data/**",
+        "pnpm-lock.yaml"
+    ],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+        "vsix"
+    ],
+    "ignoreWords": [],
+    "import": []
+}

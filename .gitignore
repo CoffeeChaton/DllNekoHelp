@@ -1,0 +1,5 @@
+.eslintcache
+.vscode-test/
+*.vsix
+dist/
+node_modules/
