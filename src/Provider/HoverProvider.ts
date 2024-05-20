@@ -1,6 +1,5 @@
-import * as vscode from 'vscode';
-import type { TFnDef } from '../initializeC';
-import { VscMainMap } from '../initializeVsc';
+import type * as vscode from 'vscode';
+import { HoverProvider_ahk } from './HoverProvider_ahk';
 
 export const HoverProvider: vscode.HoverProvider = {
     provideHover(
@@ -8,36 +7,11 @@ export const HoverProvider: vscode.HoverProvider = {
         position: vscode.Position,
         _token: vscode.CancellationToken,
     ): vscode.ProviderResult<vscode.Hover> {
-        //
-        const range: vscode.Range | undefined = document.getWordRangeAtPosition(
-            position,
-            /(?<=["' \t,]|^)[\w.\-+\\]+/u,
-        );
-        if (range === undefined) return null;
+        const { languageId } = document;
 
-        const word: string = document.getText(range);
+        if (languageId === 'ahk') return HoverProvider_ahk(document, position);
+        // if
 
-        const dllRawNameInDoc: string = word
-            .replace(/[\\/].*/u, '')
-            .replace(/\.dll/iu, '');
-
-        const v = VscMainMap.get(dllRawNameInDoc.toUpperCase());
-        if (v === undefined) return null;
-
-        const { md, dllMap, dllRawName } = v;
-
-        if (word.includes('/') || word.includes('\\')) {
-            const fnRawName: string = word.replace(/.*[\\/]/u, '');
-            const fnDef: TFnDef | undefined = dllMap.get(fnRawName.toUpperCase());
-            if (fnDef !== undefined) {
-                //
-                const fnMd = new vscode.MarkdownString(`${dllRawName}/${fnRawName}`, true);
-                // eslint-disable-next-line no-magic-numbers
-                fnMd.appendCodeblock(JSON.stringify(fnDef, null, 4), 'jsonc');
-                return new vscode.Hover(fnMd, range);
-            }
-        }
-
-        return new vscode.Hover(md);
+        return null;
     },
 };

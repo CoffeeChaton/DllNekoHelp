@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import { describe, expect, it } from '@jest/globals';
-import type { TMainMap } from './initializeC';
-import { initializeC } from './initializeC';
+import type { TMainMap } from './initialize';
+import { initialize } from './initialize';
 
 const _notSearchInMsdn = [
     'gdiplus\\GdipGetLastStatus',
@@ -512,7 +512,7 @@ describe('check nls', () => {
 
         const errList0: string[] = [];
         // const log: string[] = [];
-        const mainMap: TMainMap = initializeC();
+        const mainMap: TMainMap = initialize();
 
         for (const s of t1) {
             const i = s.indexOf('\\');

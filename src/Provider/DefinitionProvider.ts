@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import type { TFnDef } from '../initializeC';
-import { VscMainMap } from '../initializeVsc';
+import type { TFnDef } from '../initialize';
+import { VscMainMap } from '../VscMainMap';
 
 function fnDef2Loc(fnDefList: TFnDef, originSelectionRange: vscode.Range): vscode.DefinitionLink[] {
     const { fullPath, pos: { line, col }, name } = fnDefList;

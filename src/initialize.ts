@@ -6,6 +6,7 @@ import * as path from 'node:path';
 
 export type TFnDef = {
     // fullFunc: string,
+    fullSign: string,
     fullFunc: string,
     name: string,
     file: string,
@@ -29,7 +30,7 @@ export type TDllMeta = {
  */
 export type TMainMap = ReadonlyMap<string, TDllMeta>;
 
-export function initializeC(): TMainMap {
+export function initialize(): TMainMap {
     const absolutePath: string = path.join(__dirname, '../data/baseline');
     const files: string[] = fs.readdirSync(absolutePath);
 
@@ -51,6 +52,7 @@ export function initializeC(): TMainMap {
             const s: string = dataLineStr[line];
             for (const ma of s.matchAll(/(\w+)\(.*\)/giu)) {
                 const v: TFnDef = {
+                    fullSign: s.trim(),
                     fullFunc: ma[0],
                     name: ma[1],
                     file,

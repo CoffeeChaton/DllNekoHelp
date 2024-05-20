@@ -4,6 +4,7 @@
   - [Extensions for Visual Studio Code](#extensions-for-visual-studio-code)
     - [hover provide](#hover-provide)
     - [gotoDef provide](#gotodef-provide)
+  - [config](#config)
   - [data source](#data-source)
 
 ## Extensions for Visual Studio Code
@@ -18,7 +19,18 @@ not provided to Visual Studio Marketplace now.
 
 ### gotoDef provide
 
----
+## config
+
+```ts
+    const ed: TConfigs = {
+        '[ahk]': {
+            tryGetWith: ['User32.dll', 'Kernel32.dll', 'ComCtl32.dll', 'Gdi32.dll'],
+        },
+        '[cpp]': {
+            tryGetWith: ['User32.dll', 'Kernel32.dll'],
+        },
+    } as const;
+```
 
 ## data source
 

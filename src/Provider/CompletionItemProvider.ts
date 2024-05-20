@@ -1,34 +1,5 @@
-import * as vscode from 'vscode';
-import { VscMainMap } from '../initializeVsc';
-
-const fullDllCompletions: readonly vscode.CompletionItem[] = ((): vscode.CompletionItem[] => {
-    const completions: vscode.CompletionItem[] = [];
-    for (const [_k, v] of VscMainMap) {
-        const completion = new vscode.CompletionItem({
-            label: v.dllRawName,
-            description: 'dll',
-        });
-
-        completion.detail = '(dll-help)'; // description
-        completion.documentation = v.md;
-        completion.kind = vscode.CompletionItemKind.File;
-        completions.push(completion);
-    }
-    return completions;
-})();
-
-function CompletionItemCore(
-    document: vscode.TextDocument,
-    position: vscode.Position,
-    context: vscode.CompletionContext,
-): vscode.CompletionItem[] {
-    if (context.triggerCharacter === '\\') {
-        console.log('🚀 ~ triggerCharacter is', '\\');
-        return [];
-    }
-
-    return [...fullDllCompletions];
-}
+import type * as vscode from 'vscode';
+import { CompletionItemProvider_ahk } from './CompletionItemProvider_ahk';
 
 export const CompletionItemProvider: vscode.CompletionItemProvider = {
     provideCompletionItems(
@@ -37,6 +8,11 @@ export const CompletionItemProvider: vscode.CompletionItemProvider = {
         _token: vscode.CancellationToken,
         context: vscode.CompletionContext,
     ): vscode.ProviderResult<vscode.CompletionItem[]> {
-        return CompletionItemCore(document, position, context);
+        const { languageId } = document;
+
+        if (languageId === 'ahk') return CompletionItemProvider_ahk(document, position, context);
+        // if
+        //
+        return null;
     },
 };
