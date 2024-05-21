@@ -38,7 +38,7 @@ export function initialize(): TMainMap {
 
     for (const file of files) {
         // const fullPath = `${absolutePath}/${file}`;
-        const dllRawName: string = file.replace(/\.c$/iu, '');
+        const dllRawName: string = file.replace(/\.md$/iu, '');
         const dllUpName: string = dllRawName.toUpperCase();
         const fullPath = `${absolutePath}${path.sep}${file}`;
 

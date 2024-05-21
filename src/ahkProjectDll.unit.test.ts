@@ -519,9 +519,7 @@ describe('check nls', () => {
             if (i > 0) {
                 const dllName1: string = s.slice(0, i);
                 const dllName1Up: string = dllName1.toUpperCase();
-                const dllName2Up: string = dllName1Up.endsWith('.DLL')
-                    ? dllName1Up
-                    : `${dllName1Up}.DLL`;
+                const dllName2Up: string = dllName1Up.replace(/\.DLL/iu, '');
                 //
                 const fnName: string = s.slice(i + 1);
                 const fnNameUp: string = fnName.toUpperCase();
@@ -543,7 +541,7 @@ describe('check nls', () => {
 
                 let isFind = false;
                 for (const dllName of ['User32.dll', 'Kernel32.dll', 'ComCtl32.dll', 'Gdi32.dll']) {
-                    const dllName2Up: string = dllName.toUpperCase();
+                    const dllName2Up: string = dllName.toUpperCase().replace(/\.DLL/iu, '');
                     const dllDef = mainMap.get(dllName2Up);
                     if (dllDef === undefined) {
                         errList0.push(`${dllName} not find`);
