@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { Regex_ahk_word } from '../tools/regex';
 import type { TVscDll } from '../VscMainMap';
 import { VscMainMap } from '../VscMainMap';
 
@@ -23,10 +24,7 @@ function Completion_func_ahk(
     document: vscode.TextDocument,
     position: vscode.Position,
 ): vscode.CompletionItem[] {
-    const range: vscode.Range | undefined = document.getWordRangeAtPosition(
-        position,
-        /(?<=["' \t,]|^)[\w.\-+\\]+/u,
-    );
+    const range: vscode.Range | undefined = document.getWordRangeAtPosition(position, Regex_ahk_word);
     if (range === undefined) return [];
 
     const word: string = document.getText(range);

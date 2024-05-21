@@ -22,14 +22,14 @@ not provided to Visual Studio Marketplace now.
 ## config
 
 ```ts
-    const ed: TConfigs = {
-        '[ahk]': {
-            tryGetWith: ['User32.dll', 'Kernel32.dll', 'ComCtl32.dll', 'Gdi32.dll'],
-        },
-        '[cpp]': {
-            tryGetWith: ['User32.dll', 'Kernel32.dll'],
-        },
-    } as const;
+const ed: TConfigs = {
+    '[ahk]': {
+        tryGetWith: ['User32.dll', 'Kernel32.dll', 'ComCtl32.dll', 'Gdi32.dll'],
+    },
+    '[cpp]': {
+        tryGetWith: ['User32.dll', 'Kernel32.dll'],
+    },
+} as const;
 ```
 
 ## data source

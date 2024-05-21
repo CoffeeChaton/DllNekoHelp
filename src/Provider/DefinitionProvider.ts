@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import type { TFnDef } from '../initialize';
+import { Regex_ahk_word } from '../tools/regex';
 import { VscMainMap } from '../VscMainMap';
 
 function fnDef2Loc(fnDefList: TFnDef, originSelectionRange: vscode.Range): vscode.DefinitionLink[] {
@@ -20,10 +21,7 @@ export const DefinitionProvider: vscode.DefinitionProvider = {
         position: vscode.Position,
         _token: vscode.CancellationToken,
     ): vscode.ProviderResult<vscode.Definition | vscode.DefinitionLink[]> {
-        const range: vscode.Range | undefined = document.getWordRangeAtPosition(
-            position,
-            /(?<=["' \t,]|^)[\w.\-+\\]+/u,
-        );
+        const range: vscode.Range | undefined = document.getWordRangeAtPosition(position, Regex_ahk_word);
         if (range === undefined) return null;
 
         const word: string = document.getText(range);

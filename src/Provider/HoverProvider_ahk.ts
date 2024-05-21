@@ -1,14 +1,23 @@
 import * as vscode from 'vscode';
 import { getConfig } from '../config';
 import type { TFnDef } from '../initialize';
+import { Regex_ahk_word } from '../tools/regex';
 import type { TVscDll } from '../VscMainMap';
 import { VscMainMap } from '../VscMainMap';
 
 function ahkMakeHoverMd(dllDef: TVscDll, fnDef: TFnDef, range: vscode.Range): vscode.Hover {
-    const space4 = 4;
     const fnMd = new vscode.MarkdownString(`${dllDef.dllRawName}\\${fnDef.name}`, true);
-    fnMd.appendCodeblock(JSON.stringify(fnDef, null, space4), 'jsonc');
+    fnMd.appendCodeblock(fnDef.fullSign, 'c');
     return new vscode.Hover(fnMd, range);
+}
+
+function ahkTryAutoAddSuffixAW(dllDef: TVscDll, fnNameUp: string): TFnDef | null {
+    if (getConfig()['[ahk]'].tryAutoAddSuffixAW) {
+        const fnDefAW: TFnDef | undefined = dllDef.dllMap.get(`${fnNameUp}A`)
+            ?? dllDef.dllMap.get(`${fnNameUp}W`);
+        if (fnDefAW !== undefined) return fnDefAW;
+    }
+    return null;
 }
 
 function ahkNotHeapCase(fnName: string, range: vscode.Range): vscode.Hover | null {
@@ -24,8 +33,8 @@ function ahkNotHeapCase(fnName: string, range: vscode.Range): vscode.Hover | nul
         const dllDef: TVscDll | undefined = VscMainMap.get(dllUpName);
         if (dllDef === undefined) continue;
 
-        const fnDef: TFnDef | undefined = dllDef.dllMap.get(fnNameUp);
-        if (fnDef !== undefined) return ahkMakeHoverMd(dllDef, fnDef, range);
+        const fnDef: TFnDef | null = dllDef.dllMap.get(fnNameUp) ?? ahkTryAutoAddSuffixAW(dllDef, fnNameUp);
+        if (fnDef !== null) return ahkMakeHoverMd(dllDef, fnDef, range);
     }
     return null;
 }
@@ -34,10 +43,7 @@ export function HoverProvider_ahk(
     document: vscode.TextDocument,
     position: vscode.Position,
 ): vscode.Hover | null {
-    const range: vscode.Range | undefined = document.getWordRangeAtPosition(
-        position,
-        /(?<=["' \t,]|^)[\w.\-+\\]+/u,
-    );
+    const range: vscode.Range | undefined = document.getWordRangeAtPosition(position, Regex_ahk_word);
     if (range === undefined) return null;
 
     const word: string = document.getText(range);
@@ -53,8 +59,10 @@ export function HoverProvider_ahk(
 
     if (word.includes('/') || word.includes('\\')) {
         const fnRawName: string = word.replace(/.*[\\/]/u, '');
-        const fnDef: TFnDef | undefined = dllMap.get(fnRawName.toUpperCase());
-        if (fnDef !== undefined) return ahkMakeHoverMd(dllDef, fnDef, range);
+        const fnNameUp: string = fnRawName.toUpperCase();
+        const fnDef: TFnDef | null = dllMap.get(fnRawName.toUpperCase())
+            ?? ahkTryAutoAddSuffixAW(dllDef, fnNameUp);
+        if (fnDef !== null) return ahkMakeHoverMd(dllDef, fnDef, range);
     }
 
     return new vscode.Hover(md);
