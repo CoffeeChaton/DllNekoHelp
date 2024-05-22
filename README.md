@@ -9,15 +9,18 @@
 
 ## Extensions for Visual Studio Code
 
-this pack at github <https://github.com/CoffeeChaton/DllNekoHelp>
-
-`DllNekoHelp`
+`DllNekoHelp` at github <https://github.com/CoffeeChaton/DllNekoHelp>
 
 not provided to Visual Studio Marketplace now.
 
 ### hover provide
 
+![img](https://raw.githubusercontent.com/CoffeeChaton/DllNekoHelp/main/img/Changelog/v0-0-0.gif)
+
 ### gotoDef provide
+
+![alt text](https://raw.githubusercontent.com/CoffeeChaton/DllNekoHelp/main/img/Changelog/v0-0-0-hover-1.jpg)
+![alt text](https://raw.githubusercontent.com/CoffeeChaton/DllNekoHelp/main/img/Changelog/v0-0-0-hover-2.jpg)
 
 ## config
 
@@ -26,7 +29,7 @@ const ed: TConfigs = {
     '[ahk]': {
         tryGetWith: ['User32.dll', 'Kernel32.dll', 'ComCtl32.dll', 'Gdi32.dll'],
     },
-    '[cpp]': {
+    '[markdown]': {
         tryGetWith: ['User32.dll', 'Kernel32.dll'],
     },
 } as const;

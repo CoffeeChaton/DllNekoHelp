@@ -17,7 +17,7 @@ function upConfig(Configs: vscode.WorkspaceConfiguration): TConfigs {
             tryGetWith: ['User32.dll', 'Kernel32.dll', 'ComCtl32.dll', 'Gdi32.dll'],
             tryAutoAddSuffixAW: true, // only of ahk
         },
-        '[cpp]': {
+        '[markdown]': {
             tryGetWith: ['User32.dll', 'Kernel32.dll'],
             tryAutoAddSuffixAW: false,
         },
