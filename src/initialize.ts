@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable no-magic-numbers */
-/* eslint-disable dot-notation */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
@@ -42,9 +39,9 @@ export function initialize(): TMainMap {
         const dllUpName: string = dllRawName.toUpperCase();
         const fullPath = `${absolutePath}${path.sep}${file}`;
 
-        let dataFromJson: string = fs.readFileSync(fullPath).toString();
-        const dataLineStr: string[] = dataFromJson.split('\n');
-        dataFromJson = '';
+        const dataLineStr: string[] = fs.readFileSync(fullPath)
+            .toString()
+            .split('\n');
         const { length } = dataLineStr;
         //
         const dllMap: TDllCMap = new Map();

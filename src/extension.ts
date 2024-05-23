@@ -23,7 +23,6 @@ export function activate(context: vscode.ExtensionContext): void {
         '\'',
     ];
 
-    // TODO User32.dll, Kernel32.dll, ComCtl32.dll, or Gdi32.dll
     context.subscriptions.push(
         vscode.languages.registerHoverProvider(selector, HoverProvider),
         vscode.languages.registerDefinitionProvider(selector, DefinitionProvider),

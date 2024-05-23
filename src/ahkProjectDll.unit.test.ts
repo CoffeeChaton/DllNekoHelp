@@ -506,8 +506,8 @@ const t1 = [
     'wsprintfW',
 ];
 
-describe('check nls', () => {
-    it('check : nls', () => {
+describe('check dll', () => {
+    it('check : dll from ahk project', () => {
         expect.hasAssertions();
 
         const errList0: string[] = [];
