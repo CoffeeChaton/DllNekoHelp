@@ -1,24 +1,25 @@
+/* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
 /* eslint-disable max-depth */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-//
 
 type TBase = {
     api_name: string,
     main: string,
 };
 
-type TMdDataBase = TBase & {
+export type TMdDataBase = TBase & {
     // normal
     kind: 'collection',
 };
-type TEnum = TBase & {
+
+export type TEnum = TBase & {
     kind: 'enumeration',
     // also can let ^title:.*enumeration \(
 };
 
-type TObject = TBase & {
+export type TObject = TBase & {
     kind: 'object',
     //
     Events: string[],
@@ -26,14 +27,14 @@ type TObject = TBase & {
     Properties: string[],
 };
 
-type TOther = TBase & {
+export type TOther = TBase & {
     kind: 'method' | 'property' | 'event',
     //
     Parameters: string[],
     Return_value: string,
 };
 
-type TApiMeta = TMdDataBase | TObject | TEnum | TOther;
+export type TApiMeta = TMdDataBase | TObject | TEnum | TOther;
 // object
 // - Events
 // - Methods
@@ -169,9 +170,9 @@ export function make_vba_json(source_path: string, export_path: string): void {
         }
 
         if (api_name === '') continue;
-        const need: TApiMeta[] = bigObj[api_name.replace(/\..*/u, '')]
-            // eslint-disable-next-line dot-notation
-            ?? bigObj['unknown'];
+
+        // eslint-disable-next-line dot-notation
+        const need: TApiMeta[] = bigObj[api_name.replace(/\..*/u, '')] ?? bigObj['unknown'];
 
         switch (kind) {
             case 'collection':
@@ -212,6 +213,6 @@ export function make_vba_json(source_path: string, export_path: string): void {
 
     const space4 = 4;
     for (const [k, v] of Object.entries(bigObj)) {
-        fs.writeFileSync(`${export_path}${k}.json`, JSON.stringify(v, null, space4));
+        fs.writeFileSync(`${export_path}${path.sep}${k}.json`, JSON.stringify([...v.values()], null, space4));
     }
 }

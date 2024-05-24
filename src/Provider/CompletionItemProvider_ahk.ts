@@ -7,10 +7,10 @@ const fullDllCompletions_ahk: readonly vscode.CompletionItem[] = ((): vscode.Com
     const completions: vscode.CompletionItem[] = [];
     for (const [_k, v] of VscMainMap) {
         const completion = new vscode.CompletionItem({
-            label: v.dllRawName,
+            label: v.dllRawName.replace(/\.dll/iu, ''),
             description: 'dll',
         });
-
+        completion.insertText = v.dllRawName;
         completion.detail = '(dll-help)'; // description
         completion.documentation = v.md;
         completion.kind = vscode.CompletionItemKind.File;
@@ -67,5 +67,16 @@ export function CompletionItemProvider_ahk(
         return Completion_func_ahk(document, position);
     }
 
-    return [...fullDllCompletions_ahk];
+    const leftText: string = document.getText(
+        new vscode.Range(
+            new vscode.Position(position.line, 0),
+            position,
+        ),
+    );
+
+    if ((/\bDllCall\(\s*"?/iu).test(leftText.trim())) {
+        return [...fullDllCompletions_ahk];
+    }
+
+    return [];
 }
